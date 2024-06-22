@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { CheckCircle, Edit, TrashIcon, X } from 'lucide-react';
-import { CreateAndEditTask } from 'components/general/createTasks';
+import { CreateAndEditTask } from 'components/general/taskss';
+import { formatDate } from 'date-fns';
 
 interface Iprops {
   switchTab: (tab: string) => void;
@@ -10,23 +11,12 @@ interface Iprops {
 interface items {
   id: number;
   name: string;
-  dueDate: string;
+  dueDate: Date;
   description: string;
   number_of_titles: number;
 }
 
 const TaskListAndInput = () => {
-  const checkIcon = (dueDate: string) => {
-    if (dueDate === 'High') {
-      return 'HighLevel';
-    }
-
-    if (dueDate === 'Low') {
-      return 'LowLevel';
-    }
-    return 'MediumLevel';
-  };
-
   const [allTasks, SetAllTask] = useState<items[]>([]);
   const [completedTasks, setCompletedTasks] = useState<items[]>([]);
   const addToSelected = (item: items) => {
@@ -72,7 +62,7 @@ const TaskListAndInput = () => {
                 <p className='font-bold capitalize'> {item.name}</p>
                 <div className='flex w-full justify-between'>
                   <span className='flex items-center gap-1'>
-                    <p className='text-gray-500'>{item.dueDate}</p>
+                    <p className='text-gray-500'>{formatDate(item.dueDate, 'dd/MM/yyyy')}</p>
                   </span>
                 </div>
                 <div className='flex w-full justify-between'>
@@ -125,7 +115,7 @@ const TaskListAndInput = () => {
                 </div>
                 <div className='flex w-full justify-between'>
                   <span className='flex items-center gap-1'>
-                    <p className='text-gray-500'>{item.dueDate}</p>
+                    <p className='text-gray-500'>{formatDate(item.dueDate, 'dd/MM/yyyy')}</p>
                   </span>
                 </div>
               </button>
