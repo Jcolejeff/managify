@@ -72,6 +72,7 @@ export function CreateAndEditTask({ trigger, isEdit, tasks, setTasks, taskId, ta
         return task;
       });
       setTasks(updatedTasks);
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     } else {
       // create task
       const newTask = {
@@ -82,6 +83,7 @@ export function CreateAndEditTask({ trigger, isEdit, tasks, setTasks, taskId, ta
         number_of_titles: 0,
       };
       setTasks([...tasks, newTask]);
+      localStorage.setItem('tasks', JSON.stringify([...tasks, newTask]));
     }
     setOpen(false);
   }

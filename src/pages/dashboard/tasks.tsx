@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CheckCircle, Edit, TrashIcon, X } from 'lucide-react';
-import { CreateAndEditTask } from 'components/general/taskss';
+import { CreateAndEditTask } from 'components/general/createAndEditTask';
 import { formatDate } from 'date-fns';
 
 interface Iprops {
@@ -15,10 +15,26 @@ interface items {
   description: string;
   number_of_titles: number;
 }
+const getTasksFromLocalStorage = () => {
+  const tasks = localStorage.getItem('tasks');
+  if (tasks) {
+    return JSON.parse(tasks);
+  }
+  return [];
+};
+const getCompletedTasksFromLocalStorage = () => {
+  const tasks = localStorage.getItem('completedTasks');
+  if (tasks) {
+    return JSON.parse(tasks);
+  }
+  return [];
+};
 
 const TaskListAndInput = () => {
-  const [allTasks, SetAllTask] = useState<items[]>([]);
-  const [completedTasks, setCompletedTasks] = useState<items[]>([]);
+  const [allTasks, SetAllTask] = useState<items[]>(getTasksFromLocalStorage() || []);
+  const [completedTasks, setCompletedTasks] = useState<items[]>(
+    getCompletedTasksFromLocalStorage() || [],
+  );
   const addToSelected = (item: items) => {
     const tempArr = allTasks.filter((i) => i.id !== item.id);
     SetAllTask(tempArr);
