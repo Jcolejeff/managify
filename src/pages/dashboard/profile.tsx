@@ -16,14 +16,6 @@ import TaskListAndInput from './tasks';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      removeUserFromLocalStorage();
-      navigate('/');
-    }, 120000); // 120,000 milliseconds = 2 minutes
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <main className='w-full  h-full '>
