@@ -141,9 +141,7 @@ export function CreateAndEditTask({ trigger, isEdit, tasks, setTasks, taskId, ta
                       />
                     </PopoverContent>
                   </Popover>
-                  <FormDescription>
-                    Your date of birth is used to calculate your age.
-                  </FormDescription>
+
                   <FormMessage />
                 </FormItem>
               )}
